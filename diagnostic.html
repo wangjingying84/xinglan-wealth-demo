@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- ip-copyright | © 2026 yuan 版权所有 侵权必究 | Copyright © 2026 yuan. All rights reserved. | License: https://creativecommons.org/licenses/by-nc-nd/4.0/ | 本文件为 yuan 原创作品，受《中华人民共和国著作权法》保护，未经许可不得复制、传播或用于商业用途。 -->
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>家族财富管理 · 客户诊断决策树工具</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;background:#eef1f5;color:#1a2236}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px 60px}
+header{background:#1a2236;color:#fff;padding:20px 0}.title{font-size:22px;font-weight:800;margin:0}.subt{opacity:.82;font-size:13.5px;margin-top:5px}
+.warn{background:#fff4e5;border:1px solid #e0b15a;color:#7a4d00;font-size:12.5px;padding:9px 13px;border-radius:8px;margin:14px 0}
+.layout{display:grid;grid-template-columns:minmax(360px,440px) 1fr;gap:18px;align-items:start}
+@media(max-width:880px){.layout{grid-template-columns:1fr}}
+.panel{background:#fff;border:1px solid #e1e6ee;border-radius:12px;padding:16px 18px}
+.panel.sticky{position:sticky;top:14px}
+h3{margin:0 0 10px;font-size:16px}.grp{margin:14px 0 6px;font-size:13px;font-weight:700;color:#0d3b66;border-left:3px solid #1565c0;padding-left:8px}
+label.chk{display:flex;gap:9px;align-items:flex-start;padding:7px 9px;border:1px solid #e3e7ee;border-radius:8px;margin:5px 0;cursor:pointer;font-size:13px;line-height:1.4;transition:.12s}
+label.chk:hover{background:#f4f7fb}label.chk.on{background:#e8f0fc;border-color:#7fa8e0}
+label.chk input{margin-top:2px}
+.btnrow{display:flex;gap:8px;margin-top:12px}
+button{border:1px solid #ccd2db;background:#f6f8fb;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
+button.primary{background:#1565c0;color:#fff;border-color:#1565c0}button:hover{filter:brightness(.97)}
+.empty{color:#8a93a8;font-size:13.5px;padding:30px 10px;text-align:center}
+.dim{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.dchip{background:#1a2236;color:#fff;font-size:12px;padding:4px 11px;border-radius:14px;font-weight:600}
+.sec2{margin:16px 0}.sec2 h4{margin:0 0 9px;font-size:14px;display:flex;align-items:center;gap:7px}
+.sec2 h4 .ic{width:7px;height:18px;border-radius:2px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.tool{background:#eef4ff;border:1px solid #c5d8f2;color:#13447a;font-size:12.5px;padding:5px 11px;border-radius:15px}
+.rl{background:#fdecea;border:1px solid #f0b8b1;color:#8a1b12;font-size:12.5px;padding:5px 11px;border-radius:15px;font-weight:600}
+.law{background:#f0f7f0;border:1px solid #bcdcc0;color:#1b5e20;font-size:12px;padding:5px 11px;border-radius:15px}
+.case{background:#f3eefc;border:1px solid #d8c7ef;color:#5a2f8a;font-size:12.5px;padding:5px 11px;border-radius:15px;cursor:default}
+.caut{background:#fffbe9;border:1px solid #e7cf8a;border-radius:8px;padding:9px 12px;font-size:12.5px;color:#6a4e00;margin:6px 0;line-height:1.5}
+.count{font-size:12px;color:#7a8198;font-weight:400;margin-left:6px}
+footer{text-align:center;color:#7a8198;font-size:12px;margin-top:24px}
+</style>
+<meta name="ip-copyright" content="© 2026 yuan 版权所有 侵权必究">
+<meta name="author" content="yuan">
+<meta name="copyright" content="© 2026 yuan 版权所有 侵权必究">
+<meta name="dcterms.rights" content="© 2026 yuan 版权所有 侵权必究 | Copyright © 2026 yuan. All rights reserved.">
+<meta name="dcterms.dateCopyrighted" content="2026">
+<meta name="dcterms.creator" content="yuan">
+<meta name="license" content="CC BY-NC-ND 4.0">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+</head><body>
+<header><div class="wrap"><p class="title">家族财富管理 · 客户诊断决策树工具</p>
+<p class="subt">勾选客户事实 → 实时输出风险维度 · 工具组合 · 行为红线 · 可参照案例 · 关键法源（演练版·不构成法律意见）</p></div></header>
+<div class="wrap">
+<div class="warn">⚠️ 内部演练工具：输出为初步映射，非法律意见。法源/案号 信源级别 内部研究（未核验，减持暂行办法/周艳二审等已经北大法宝校正）；对外前须逐条核验。隔离功能只做不承诺（R6/R13）。</div>
+<div class="layout">
+  <div class="panel sticky"><h3>① 勾选客户事实</h3><div id="form"></div>
+   <div class="btnrow"><button class="primary" onclick="sel(1)">全选</button><button onclick="sel(0)">清空</button></div>
+  </div>
+  <div class="panel"><h3>② 诊断输出 <span class="count" id="cnt"></span></h3><div id="out"><div class="empty">请在左侧勾选客户事实，结果将实时生成。</div></div></div>
+</div></div>
+<footer>© 2026 YUAN · 客户诊断决策树工具 · 配套[[00_十一案互动合览]]</footer>
+<script>
+var DATA={"facts": [{"id": "f1", "g": "主体与控制", "t": "A股上市公司·控制权集中于个人", "tools": ["控制权机构化 GP/LP（M1/M3）", "合伙SPV控制收益分置（M2）", "家族控股公司"], "rl": [], "cases": ["c1"], "laws": ["公司法第144条（上市原则禁超级表决权）"], "caut": ["A股不可双重表决权，只能用GP结构逼近"]}, {"id": "f2", "g": "主体与控制", "t": "港股红筹 / 境外持股架构", "tools": ["港股 WVR 同股不同权（联交所8A章）", "离岸信托 + 境内外双层信托", "37号文/ODI 外汇合规"], "rl": ["R13"], "cases": ["c5"], "laws": ["个税法第1条（居民全球征税）", "CRS公告2017第14号·第13条", "人行令〔2025〕12号·第12条"], "caut": ["离岸≠离税≠不申报；保留控制越多→隔离越弱且CRS穿透申报越确定"]}, {"id": "f3", "g": "主体与控制", "t": "一致行动协议（多人共同控制）", "tools": ["表决权归属条款（信托法52 vs 民934）", "受益人代表 + 继任顺位", "保护人否决型监督（收购办法84）", "一致行动机构化 + GP继任"], "rl": ["R7"], "cases": ["c3"], "laws": ["民法典第934条（委托终止）", "信托法第52条", "上市公司收购管理办法（2025修正）第83/84条"], "caut": ["把表决权委托给个人行使的安排随其身故失效；须改为归入信托财产管理"]}, {"id": "f4", "g": "主体与控制", "t": "股权代持 / 隐名股东", "tools": ["代持还原 / 显名", "转入持股平台", "章程继承开关（公司法90）"], "rl": [], "cases": ["c2"], "laws": ["民法典第934条（代持终止）", "公司法第90条", "公司法解释（三）（显名）"], "caut": ["代持随当事人死亡终止；隐名股东难当然显名"]}, {"id": "f5", "g": "主体与控制", "t": "非上市公司 / 持股平台为控股主体", "tools": ["持股平台章程继承开关（公司法90但书）", "家族控股公司", "家族宪章 + 家族委员会（M4）"], "rl": [], "cases": ["c2"], "laws": ["公司法第90条但书", "民法典第1127/1128条"], "caut": ["章程沉默=法定继承=控制权裂变；周艳案二审(2018)最高法民终88号：章程可有效排除股东资格继承"]}, {"id": "f6", "g": "婚姻与代际", "t": "实控人婚内无财产约定", "tools": ["夫妻财产确权", "约定财产制（民1065）"], "rl": [], "cases": ["c1", "c4"], "laws": ["民法典第1062/1066条"], "caut": ["共同财产入信托须配偶书面同意/共同设立（效力底线）"]}, {"id": "f7", "g": "婚姻与代际", "t": "实控人处于婚变/离婚风险（敏感期）", "tools": ["离婚/婚内分割先行确权", "控制权与披露稳控"], "rl": ["R9"], "cases": ["c4"], "laws": ["婚姻家庭编解释（二）第3/7条", "民法典第1066/1092条"], "caut": ["敏感期最危险的是乱作为——单方把共同财产入信托对抗配偶，解释二7条无效+少分、3条债权人可撤销"]}, {"id": "f8", "g": "婚姻与代际", "t": "二代即将结婚 / 防范二代离婚", "tools": ["婚前财产约定（民1065）", "分配做成个人财产（民1063三项）", "全裁量分配"], "rl": [], "cases": ["c4", "c7"], "laws": ["民法典第1063/1065条"], "caut": ["信托受益权是否夫妻共同财产无统一判例，靠条款+婚协双重前置防御"]}, {"id": "f9", "g": "婚姻与代际", "t": "再婚家庭（配偶与前段子女关系紧张）", "tools": ["婚内财产协议", "保险金信托（控制与受益分流）", "遗嘱"], "rl": [], "cases": ["c3"], "laws": ["民法典第1062/1130条"], "caut": ["控制权继受走信托/受益人代表，经济保障走保险金信托，减少正面争夺"]}, {"id": "f10", "g": "婚姻与代际", "t": "存在非婚生子女", "tools": ["正式信托独立受益份额", "遗嘱明确安排"], "rl": ["R11"], "cases": ["c1"], "laws": ["民法典第1071条"], "caut": ["法定继承权不可剥夺；勿用委托书/确认函（娃哈哈镜鉴）；以信托压缩特留份无明确判例"]}, {"id": "f11", "g": "受益人特殊情况", "t": "残障 / 无独立生活能力 / 未成年受益人", "tools": ["特殊需要信托（信托法9/11）", "遗嘱指定监护接续（民29）", "照护预算直接支付", "监护人/受托人/监督人多方制衡", "给付节奏化"], "rl": [], "cases": ["c11"], "laws": ["民法典第28/29/31-32条", "信托法第9/11条"], "caut": ["核心是防监护人侵占与照护断档；信托给付与社会救助资格衔接口径不明（宜补充型给付）"]}, {"id": "f12", "g": "受益人特殊情况", "t": "受益人自身有债务/被执行/挥霍倾向", "tools": ["全裁量分配", "挥霍信托条款（受益权不得转让/质押/抵债·信托法47/48）", "债务/破产暂停分配条款", "受益人代表 + 加入条款"], "rl": [], "cases": ["c7"], "laws": ["信托法第47/48条"], "caut": ["受益权默认可被受益人债权人执行；限制条款是唯一抓手但效力无统一判例，不承诺绝对"]}, {"id": "f13", "g": "债务与风险", "t": "实控人个人连带担保 / 经营性负债", "tools": ["连带担保拆弹（隔离前提）", "隔离设立时点留痕（R9）", "去指令化（R3–R8）"], "rl": ["R3", "R4", "R5", "R6", "R9", "R10"], "cases": ["c1"], "laws": ["信托法第11/12/15/17条", "民法典第538/539条"], "caut": ["境内对抗委托人自身债权人的隔离无生效判例，只做不承诺（R6）"]}, {"id": "f14", "g": "债务与风险", "t": "PE对赌 / 个人回购义务", "tools": ["对赌谈判/企业承接", "隔离设立时点留痕（R9）"], "rl": ["R9"], "cases": ["c2"], "laws": ["九民纪要（股东对赌有效）", "信托法第12条", "民法典第538/539条"], "caut": ["回购触发后再设隔离结构撤销风险极高"]}, {"id": "f15", "g": "债务与风险", "t": "涉证券违法 / 涉刑风险", "tools": ["信托账户合规报告 + 权益申报归位", "资金来源逐笔甄别", "善意受益人合法部分主张"], "rl": ["R10", "R12", "R13"], "cases": ["c8"], "laws": ["刑法第64条", "信托法第11/12②/17条", "证券法第36/78/186/197条"], "caut": ["没收/追缴≠债权人撤销，是特定标的追及；以非法财产设立信托自始无效；镜鉴新易盛〔2025〕29号"]}, {"id": "f16", "g": "债务与风险", "t": "高比例质押 / 减持套现需求", "tools": ["分批解质押", "减持合规排期"], "rl": [], "cases": ["c3", "c5"], "laws": ["上市公司股东减持股份管理暂行办法（2025修正）", "收购办法第63条（继承触发披露）"], "caut": ["破净/破发/分红不达标/质押比/预披露约束；避免减持触发实控人变更披露"]}, {"id": "f17", "g": "健康与身份", "t": "实控人高龄 / 健康风险（可能失能）", "tools": ["意定监护（民33 优先于法定民28）", "失能行为能力认定（民24）", "信托不因失能终止（信托法52）", "失能触发分层条款", "人钱分离", "董事长职权代行预案"], "rl": [], "cases": ["c6"], "laws": ["民法典第24/28/33条", "信托法第52条"], "caut": ["失能是'活体真空'；意定监护优先排除监护争夺；失能前订立须留完全行为能力医学证据"]}, {"id": "f18", "g": "健康与身份", "t": "境外资产 / 二代移民或外籍身份", "tools": ["CRS穿透合规", "境内外双层信托", "境外遗产税预案", "移民身份变更触发条款"], "rl": ["R13"], "cases": ["c5"], "laws": ["个税法第1/7/8条", "CRS公告2017第14号", "人行令〔2025〕12号"], "caut": ["二代移民改变税务居民身份与CRS交换对象国；境外房产按所在地遗产税'可能开征'做预案"]}, {"id": "f19", "g": "传承文件与目的", "t": "已有/拟有多份传承文件（遗嘱+保单+信托）", "tools": ["五步衔接 SOP", "生前信托为主轴", "遗嘱兜底·逐项明示排除", "大额保单独立轨道", "遗产管理人指定"], "rl": ["R11"], "cases": ["c9"], "laws": ["信托法第8/13条", "民法典第1133/1145-1149条", "保险法第42条"], "caut": ["纠纷根源是多文件冲突/关键一份从未生效；遗嘱信托身后设立有落空风险（须备位受托人）"]}, {"id": "f20", "g": "传承文件与目的", "t": "想做慈善 / 保留家族影响力与声誉", "tools": ["慈善信托（慈善法44-46）", "公益/私益双轨分离", "捐赠人建议权·命名权（影响力止于治理）", "家族宪章慈善篇"], "rl": [], "cases": ["c10"], "laws": ["慈善法（2023修正）第55/44-46条", "民政部令62号", "企业所得税法第26条"], "caut": ["基金会控股反哺家族不可行（慈善法55）；影响力越界为私益处分将危及公益性与税收资格"]}], "cases": {"c1": "案一·星澜精密", "c2": "案二·宏图实业", "c3": "案三·瑞宁科技", "c4": "案四·景行新材", "c5": "案五·安邦智控", "c6": "案六·宸光医疗", "c7": "案七·嘉沃集团", "c8": "案八·泰昇科技", "c9": "案九·衡远控股", "c10": "案十·仁济公益", "c11": "案十一·安和家族"}, "groups": ["主体与控制", "婚姻与代际", "受益人特殊情况", "债务与风险", "健康与身份", "传承文件与目的"], "rlname": {"R3": "R3 不保留账户签字权", "R4": "R4 不按己意划款", "R5": "R5 税表不列实益所有人", "R6": "R6 隔离功能书面告知·不承诺", "R7": "R7 受托人去指令化", "R9": "R9 设立时点有偿付能力留痕", "R10": "R10 逐笔合规·资金来源干净", "R11": "R11 不停留意向性文件·正式设立", "R12": "R12 配合披露·不被叙事误导", "R13": "R13 CRS：隔离≠不申报"}};
+var sels={};
+function render(){
+ var f=document.getElementById('form');var h='';var cur='';
+ DATA.facts.forEach(function(x){
+  if(x.g!==cur){h+='<div class="grp">'+x.g+'</div>';cur=x.g;}
+  h+='<label class="chk" id="L'+x.id+'"><input type="checkbox" onchange="tog(\''+x.id+'\',this.checked)"><span>'+x.t+'</span></label>';
+ });
+ f.innerHTML=h;
+}
+function tog(id,v){sels[id]=v;document.getElementById('L'+id).classList.toggle('on',v);compute();}
+function sel(all){DATA.facts.forEach(function(x){sels[x.id]=!!all;var l=document.getElementById('L'+x.id);l.classList.toggle('on',!!all);l.querySelector('input').checked=!!all;});compute();}
+function uniq(a){var s=[],seen={};a.forEach(function(x){if(!seen[x]){seen[x]=1;s.push(x);}});return s;}
+function compute(){
+ var chosen=DATA.facts.filter(function(x){return sels[x.id];});
+ var out=document.getElementById('out');
+ document.getElementById('cnt').textContent=chosen.length?('已选 '+chosen.length+' 项'):'';
+ if(!chosen.length){out.innerHTML='<div class="empty">请在左侧勾选客户事实，结果将实时生成。</div>';return;}
+ var dims=uniq(chosen.map(function(x){return x.g;}));
+ var tools=[],rl=[],cases=[],laws=[],caut=[];
+ chosen.forEach(function(x){tools=tools.concat(x.tools);rl=rl.concat(x.rl);cases=cases.concat(x.cases);laws=laws.concat(x.laws);caut=caut.concat(x.caut);});
+ tools=uniq(tools);rl=uniq(rl);cases=uniq(cases);laws=uniq(laws);caut=uniq(caut);
+ var h='';
+ h+='<div class="sec2"><h4><span class="ic" style="background:#1a2236"></span>命中风险维度</h4><div class="dim">'+dims.map(function(d){return '<span class="dchip">'+d+'</span>';}).join('')+'</div></div>';
+ h+='<div class="sec2"><h4><span class="ic" style="background:#1565c0"></span>推荐工具组合（'+tools.length+'）</h4><div class="chips">'+tools.map(function(t){return '<span class="tool">'+t+'</span>';}).join('')+'</div></div>';
+ if(rl.length){rl.sort(function(a,b){return parseInt(a.slice(1))-parseInt(b.slice(1));});
+  h+='<div class="sec2"><h4><span class="ic" style="background:#c0392b"></span>触发行为红线（'+rl.length+'）</h4><div class="chips">'+rl.map(function(r){return '<span class="rl">'+(DATA.rlname[r]||r)+'</span>';}).join('')+'</div></div>';}
+ h+='<div class="sec2"><h4><span class="ic" style="background:#5a2f8a"></span>可参照案例（'+cases.length+'）</h4><div class="chips">'+cases.map(function(c){return '<span class="case">'+DATA.cases[c]+'</span>';}).join('')+'</div></div>';
+ h+='<div class="sec2"><h4><span class="ic" style="background:#1b5e20"></span>关键法源（'+laws.length+'）</h4><div class="chips">'+laws.map(function(l){return '<span class="law">'+l+'</span>';}).join('')+'</div></div>';
+ h+='<div class="sec2"><h4><span class="ic" style="background:#c9a227"></span>不确定性 / 风控提示（'+caut.length+'）</h4>'+caut.map(function(c){return '<div class="caut">⚠ '+c+'</div>';}).join('')+'</div>';
+ out.innerHTML=h;
+}
+render();
+</script>
+<div id="ip-copyright" role="contentinfo" aria-label="版权" style="position:fixed;right:8px;bottom:6px;z-index:2147483600;font:11px/1.4 'PingFang SC','Microsoft YaHei',sans-serif;color:#94a3b8;opacity:.7;pointer-events:none;user-select:none;white-space:nowrap;">© 2026 yuan 版权所有 侵权必究</div>
+</body></html>
